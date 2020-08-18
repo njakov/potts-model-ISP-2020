@@ -18,6 +18,8 @@ L = 50
 k = 4 #broj suseda
 N = L*L
 
+broj_linkova = (N*2) 
+potrebno_prepovezanih =  int(broj_linkova*p)
 #==============================================================================
 #susedni nodovi
 def gore(i):
@@ -53,7 +55,7 @@ def intersection(lst1, lst2):
 #==============================================================================
 susedi = []
 susedi_resetka = []
-broj_linkova = (N*2) #ili ipak L*L*4
+
 #==============================================================================
 #susedi na početku
 for i in range (L*L):
@@ -81,14 +83,14 @@ for nod in range(L*L):
                     susedi[sused].remove(nod)
                     susedi[novi_sused].append(nod)
                     broj_prepovezanih = broj_prepovezanih + 1 
-                    if broj_prepovezanih ==  int(broj_linkova*p):
+                    if broj_prepovezanih ==  potrebno_prepovezanih:
                         break
     else:
         continue
     break
     
                 
-print('broj prepovezanih u prvom krugu: ',broj_prepovezanih, '  /  ', broj_linkova*p)
+print('broj prepovezanih u prvom krugu: ',broj_prepovezanih, '  /  ', potrebno_prepovezanih)
 #==============================================================================
 #susedi koji su ostali od inicijalne resetke
 neprepovezani_susedi  = []
@@ -97,19 +99,19 @@ for nod in range(L*L):
 
 #===============================================================================
 #drugi krug prepovezivanja
-if broj_prepovezanih < broj_linkova*p:   
-    print('Nedostaje', broj_linkova*p - broj_prepovezanih,' suseda')
+if broj_prepovezanih < potrebno_prepovezanih:   
+    print('Nedostaje', potrebno_prepovezanih - broj_prepovezanih,' suseda')
     
-    while broj_prepovezanih != broj_linkova*p:
+    while broj_prepovezanih != potrebno_prepovezanih:
         
-        nod = random.randrange(0,L*L)
+        nod = random.randrange(0, N)
         if len(neprepovezani_susedi[nod]) > 0 :
             sused = random.choice(neprepovezani_susedi[nod])
          
             if len(susedi[sused]) > 2 :        
                 check = 0
                 while check==0:
-                    novi_sused = random.randrange(0,L*L)
+                    novi_sused = random.randrange(0, N)
                     if not (novi_sused in susedi[nod] or novi_sused in susedi_resetka[nod] or novi_sused == nod ):        
                         if len(susedi[sused])> 2:
                             check = 1 
@@ -131,7 +133,7 @@ else:
 broj_linkova = 0
 for element in susedi:
     broj_linkova = broj_linkova + len(element)
-print('broj linkova:', broj_linkova,'  /  ',L*L*4)
+print('broj linkova:', broj_linkova,'  /  ', N*4)
 #==============================================================================
 #histogram mreze
     
@@ -166,7 +168,7 @@ print('vreme prepovezivanja: ', kraj - pocetak)
 
 
 broj_neprepovezanih = 0
-for nod in range(L*L):
+for nod in range(N):
     broj_neprepovezanih = broj_neprepovezanih + len(intersection(susedi[nod],susedi_resetka[nod]))
 
 print('broj onih linkova koji su ostali isti:',broj_neprepovezanih)
