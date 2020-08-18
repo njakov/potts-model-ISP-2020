@@ -17,7 +17,7 @@ N = L*L
 k = 4 #broj suseda
 
 #verovatnoca povezivanja
-p = 0.05
+p = 0.01
 broj_linkova = (N*2) 
 potrebno_prepovezanih = int(broj_linkova*p)
 
@@ -259,6 +259,7 @@ ensemble.write(
         f"""
 Lattice dimensions: {L} \n
 Number of configurations: {no_config} \n
+Rewiring probability [p]: {p} \n
 
 Time (Total number of MC steps): {time} \n
 
