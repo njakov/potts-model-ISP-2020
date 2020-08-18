@@ -11,7 +11,7 @@ import numpy as np
 
 pocetak = time.time()
 #verovatnoca povezivanja
-p = 0.6
+p = 0.1
 
 #dimenije resetke
 L = 50
@@ -69,12 +69,13 @@ for nod in range(L*L):
     for sused in linkovi:
         if sused > nod:
             if ishod(p):
-                check = 0
-                while check == 0:
-                    novi_sused = random.randrange(0,L*L)
-                    if not (novi_sused in susedi[nod] or novi_sused in susedi_resetka[nod] or novi_sused == nod):        
-                        check = 1    
                 if len(susedi[sused])> 2:
+                    check = 0
+                    while check == 0:
+                        novi_sused = random.randrange(0,L*L)
+                        if not (novi_sused in susedi[nod] or novi_sused in susedi_resetka[nod] or novi_sused == nod):        
+                            check = 1    
+
                     susedi[nod].remove(sused)
                     susedi[nod].append(novi_sused)
                     susedi[sused].remove(nod)
