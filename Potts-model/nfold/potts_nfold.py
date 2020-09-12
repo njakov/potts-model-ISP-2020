@@ -88,6 +88,11 @@ def hi(i):
     """Local field"""
     return -1*sum_spins(i)
 
+def hi2(i):
+    """Local field, drugi nacin"""
+    spin_state = lattice[i]
+    return -1*SPIN_STATES[spin][spin_state - 1]
+
 #pravljenje resetke
 lattice = np.ones((N,), dtype=int)
 twos = 0
